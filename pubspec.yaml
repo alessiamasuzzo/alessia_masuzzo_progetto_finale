@@ -89,6 +89,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+  assets:
+    - assets/images/login_bg.jpg
+
   fonts:
     - family: Fraunces
       fonts:
