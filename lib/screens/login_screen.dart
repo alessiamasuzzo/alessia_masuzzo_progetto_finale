@@ -16,6 +16,14 @@ class _LoginScreenstate extends State<LoginScreen> {
         //mettere img come sfondo 
         body: Center(
       child: Card(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(
+                color: Theme.of(context).colorScheme.primary,
+                width: 2.0,
+
+            ),
+        ),
         margin: EdgeInsetsGeometry.all(20.00),
         color: Theme.of(context).colorScheme.surface,
         child: Padding(
