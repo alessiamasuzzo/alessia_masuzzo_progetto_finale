@@ -1,3 +1,4 @@
+import 'package:alessia_masuzzo_progetto_finale/screens/main_navigation.dart';
 import 'package:alessia_masuzzo_progetto_finale/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
@@ -127,6 +128,10 @@ class _LoginScreenstate extends State<LoginScreen> {
                             content: Text(errore),
                             backgroundColor: const Color.fromARGB(255, 180, 12, 0),
                             ));
+                        } else {
+                          Navigator.pushReplacement(
+                            context, MaterialPageRoute(
+                              builder: (context) => const MainNavigation()));
                         }
                       }
                     }, child: Text("Accedi"),
