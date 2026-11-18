@@ -1,5 +1,6 @@
 import 'package:alessia_masuzzo_progetto_finale/screens/login_screen.dart';
 import 'package:alessia_masuzzo_progetto_finale/screens/main_navigation.dart';
+import 'package:alessia_masuzzo_progetto_finale/screens/wardrobe_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -25,9 +26,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: AppTheme.light,
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: LoginScreen(),
-      )
+      home: WardrobeScreen(),
     );
   }
 }
