@@ -1,3 +1,4 @@
+import 'package:alessia_masuzzo_progetto_finale/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,11 +10,13 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenstate extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _authService = AuthService();
+
 
   bool _hidePassword = true;
 
-   String? _userPassword;
-   String? _userEmail;
+  String _userPassword = "";
+  String _userEmail = "";
 
   String? _validateEmail(String? value){
     if(value == null || value.isEmpty){
@@ -70,7 +73,7 @@ class _LoginScreenstate extends State<LoginScreen> {
 
                 //email
                 TextFormField(
-                  onSaved: (newValue) => _userEmail,
+                  onSaved: (newValue) => _userEmail = newValue ?? "",
                   validator: _validateEmail,
                   decoration: InputDecoration(
                     label: Text("Email"),
@@ -86,7 +89,7 @@ class _LoginScreenstate extends State<LoginScreen> {
 
                 //password
                 TextFormField(
-                  onSaved: (newValue) => _userPassword,
+                  onSaved: (newValue) => _userPassword = newValue ?? "",
                   validator: _validatePassword,
                     obscureText: _hidePassword,
                     decoration: InputDecoration(
@@ -110,10 +113,21 @@ class _LoginScreenstate extends State<LoginScreen> {
 
                 //button
                 FilledButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if(_formKey.currentState!.validate()){
                         _formKey.currentState!.save();
-                        print("dati salvati");
+
+                        final errore = await _authService.login(_userEmail, _userPassword);
+
+                        if(!context.mounted) return;
+
+                        if (errore != null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                            content: Text(errore),
+                            backgroundColor: const Color.fromARGB(255, 180, 12, 0),
+                            ));
+                        }
                       }
                     }, child: Text("Accedi"),
                 ),
@@ -128,8 +142,6 @@ class _LoginScreenstate extends State<LoginScreen> {
 
         )
         
-        
-    
     );
 
     
