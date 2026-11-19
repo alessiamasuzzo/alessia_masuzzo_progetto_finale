@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
+  //login 
   Future<String?> login(String email, String password) async {
     try {
        await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -19,7 +20,9 @@ class AuthService {
       return "Accesso non riuscito";
     }
   }
-
-//aggiungere logout
+//logout
+Future<void> logout() async{
+  await FirebaseAuth.instance.signOut();
+}
 }
 
