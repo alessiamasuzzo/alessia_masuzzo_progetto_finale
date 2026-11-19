@@ -1,3 +1,4 @@
+import 'package:alessia_masuzzo_progetto_finale/screens/wardrobe_screen.dart';
 import 'package:alessia_masuzzo_progetto_finale/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class MainNavigation extends StatefulWidget{
   class _MainNavigationState extends State<MainNavigation>{
 
     int _index = 1;
-    final List<Widget> _pages = [Center(child: Text("Weather")), Center(child: Text("Wardrobe")), Center(child: Text("Shop"))];
+    final List<Widget> _pages = [Center(child: Text("Weather")), WardrobeScreen(), Center(child: Text("Shop"))];
 
     @override
   Widget build(BuildContext context) {

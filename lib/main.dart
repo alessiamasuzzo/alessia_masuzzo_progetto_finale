@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: AppTheme.light,
       debugShowCheckedModeBanner: false,
-      home: WardrobeScreen(),
+      home: LoginScreen(),
     );
   }
 }
