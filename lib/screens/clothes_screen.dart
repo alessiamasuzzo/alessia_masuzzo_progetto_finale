@@ -1,9 +1,28 @@
 import 'package:flutter/material.dart';
 
-class ClothesScreen extends StatelessWidget{
+class ClothesScreen extends StatefulWidget{
+  const ClothesScreen({super.key});
+
+@override
+State<ClothesScreen> createState() => _ClothesScreenState();
+}
+
+class _ClothesScreenState extends State<ClothesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Text("Pagina vestiti");
-  }
-}
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Vestiti",
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.account_circle_outlined),
+          ),
+        ],
+      ),
+      body: Text("Pagina vestiti"),);
+  }}
