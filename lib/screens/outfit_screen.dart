@@ -17,12 +17,6 @@ class _OutfitScreenState extends State<OutfitScreen>{
           "Outfit",
           style: Theme.of(context).textTheme.headlineMedium,
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.account_circle_outlined),
-          ),
-        ],
       ),
       body: Text("Pagina outfit"),);
   }}

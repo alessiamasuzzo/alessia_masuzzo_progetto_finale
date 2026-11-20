@@ -17,12 +17,6 @@ class _ClothesScreenState extends State<ClothesScreen> {
           "Vestiti",
           style: Theme.of(context).textTheme.headlineMedium,
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.account_circle_outlined),
-          ),
-        ],
       ),
       body: Text("Pagina vestiti"),);
   }}
