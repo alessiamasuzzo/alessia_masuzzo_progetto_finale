@@ -10,7 +10,7 @@ class AppColors{
   static const lightPrimaryDisabled = Color(0xffB594B6);
 
   //secondary
-  static const lightSecondary = Color(0xff82FF9E);
+  static const lightSecondary = Color(0xff355523);
   static const lightSecondaryPressed = Color(0xff5FE07F);
   static const lightSecondaryDisabled = Color(0xffA9FBC3);
 
