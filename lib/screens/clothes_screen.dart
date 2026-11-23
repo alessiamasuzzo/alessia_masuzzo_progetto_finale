@@ -1,7 +1,10 @@
+import 'package:alessia_masuzzo_progetto_finale/controllers/wardrobe_controller.dart';
 import 'package:alessia_masuzzo_progetto_finale/models/clothing_item.dart';
 import 'package:alessia_masuzzo_progetto_finale/screens/detail_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../controllers/wardrobe_controller.dart';
 
 
 class ClothesScreen extends StatefulWidget{
@@ -12,14 +15,6 @@ State<ClothesScreen> createState() => _ClothesScreenState();
 }
 
 class _ClothesScreenState extends State<ClothesScreen> {
-
-  List<ClothingItem> clothes = [
-    ClothingItem(name: "Gonna", category: "Uscire", favorite: false),
-    ClothingItem(name: "Tailleur", category: "Lavoro", favorite: false),
-    ClothingItem(name: "Top sportivo", category: "Sport", favorite: false),
-    ClothingItem(name: "Vestito", category: "Uscire", favorite: false),
-    ClothingItem(name: "Camicia", category: "Lavoro", favorite: false),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +33,14 @@ class _ClothesScreenState extends State<ClothesScreen> {
             child:
             Row(
               spacing: 5.00,
-            children: clothes
-            .where((c) => c.favorite)
+            children: context.watch<WardrobeController>().favorite
             .map((c) => Card(child: Column(
               children: [
-                Text(c.name),
-                Text(c.category),
-                Icon(c.favorite ? Icons.favorite : Icons.favorite_border_outlined),
+                Text(c.name), Icon(
+                c.favorite ? Icons.favorite : Icons.favorite_border_outlined,
+                color: c.favorite
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.secondary),
               ],
             ),))
             .toList(),
@@ -54,49 +50,69 @@ class _ClothesScreenState extends State<ClothesScreen> {
       Expanded(child: 
       
       GridView.builder(
-        itemCount: clothes.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          ), 
-          itemBuilder: (
-            context, index){
-              final c = clothes[index];
+        itemCount: context.watch<WardrobeController>().clothes.length,
+gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+  crossAxisCount: 2,
+  crossAxisSpacing: 10,
+  mainAxisSpacing: 10,
+  childAspectRatio: 0.7,
+),
+itemBuilder: (context, index) {
+  final c = context.watch<WardrobeController>().clothes[index];
 
-              return Card(
-                child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailScreen(detail: c,),
-                            ), );
-                        }, 
-                        child: Padding(padding: const EdgeInsets.all(16.00),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+  return Card(
+    clipBehavior: Clip.antiAlias,
+    child: InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailScreen(detail: c),
+          ),
+        );
+      },
+      child: Stack(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Image.network(
+                  c.imageUrl,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  errorBuilder: (context, error, stack) =>
+                      const Icon(Icons.broken_image_outlined),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(c.name),
                     Text(c.category),
-                    Positioned(
-                      top: 8.00,
-                      right: 8.00,
-                      child:IconButton(onPressed: () {
-                      setState(() {
-                        
-                      c.favorite = !c.favorite;
-                      });
-                    }, icon: c.favorite ? Icon(Icons.favorite) : Icon(Icons.favorite_border_outlined))
-                    )
-
                   ],
-                ),)
-                        ,)
-              );
-            })
-      )
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            top: 0,
+            right: 0,
+            child: IconButton(
+              onPressed: () =>
+                  context.read<WardrobeController>().toggleFavorite(c),
+              icon: Icon(
+                c.favorite ? Icons.favorite : Icons.favorite_border_outlined,
+                color: c.favorite
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.secondary,
+              ),
+            ),
+          ),
         ],
-      ) 
-      
-      );
-  }}
+      ),
+    ),
+  );
+}, ), ), ], ), ); }}
