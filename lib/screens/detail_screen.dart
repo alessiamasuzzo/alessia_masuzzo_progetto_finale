@@ -18,9 +18,15 @@ final ClothingItem detail;
       ),
       body: Card(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(detail.name),
-            Text(detail.category),
+                Image.network(detail.imageUrl,
+                fit: BoxFit.cover,
+                 width: double.infinity),
+                Text(detail.name),
+                Text(detail.description),
+                Text("Stagione: ${detail.season}"),
+                Text("Categoria: ${detail.category}"),
           ],
         ),
       ),
