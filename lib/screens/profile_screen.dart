@@ -54,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ((route) => false),
                 );
               },
-              icon: Icon(Icons.exit_to_app_outlined),
+              icon: Icon(Icons.logout_outlined),
               label: Text("Esci"),
             ),
           ],
