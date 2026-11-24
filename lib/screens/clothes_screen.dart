@@ -1,5 +1,7 @@
 import 'package:alessia_masuzzo_progetto_finale/controllers/wardrobe_controller.dart';
+import 'package:alessia_masuzzo_progetto_finale/models/categories.dart';
 import 'package:alessia_masuzzo_progetto_finale/models/clothing_item.dart';
+import 'package:alessia_masuzzo_progetto_finale/screens/add_clothing_screen.dart';
 import 'package:alessia_masuzzo_progetto_finale/screens/detail_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,7 @@ State<ClothesScreen> createState() => _ClothesScreenState();
 }
 
 class _ClothesScreenState extends State<ClothesScreen> {
+  String? _categorySelected;
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +50,29 @@ class _ClothesScreenState extends State<ClothesScreen> {
           ),
            ),
         Divider(),
+        SingleChildScrollView(
+  scrollDirection: Axis.horizontal,
+  child: Row(
+    spacing: 8,
+    children: categories
+    .map((catg)
+     => ChoiceChip(label: Text(catg), selected: _categorySelected == catg, onSelected: (_) {
+      setState(() {
+        if(_categorySelected == catg){
+
+        _categorySelected = null;
+        } 
+        else {
+          _categorySelected = catg;
+        }
+      });
+     } )).toList(),
+  ),
+),
       Expanded(child: 
       
       GridView.builder(
-        itemCount: context.watch<WardrobeController>().clothes.length,
+        itemCount: context.watch<WardrobeController>().byCategories(_categorySelected).length,
 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
   crossAxisCount: 2,
   crossAxisSpacing: 10,
@@ -58,7 +80,7 @@ gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
   childAspectRatio: 0.7,
 ),
 itemBuilder: (context, index) {
-  final c = context.watch<WardrobeController>().clothes[index];
+  final c = context.watch<WardrobeController>().byCategories(_categorySelected)[index];
 
   return Card(
     clipBehavior: Clip.antiAlias,
@@ -115,4 +137,11 @@ itemBuilder: (context, index) {
       ),
     ),
   );
-}, ), ), ], ), ); }}
+}, ), ), ], ), 
+  floatingActionButton: FloatingActionButton(onPressed: () {
+    Navigator.push(context, 
+      MaterialPageRoute(builder: (context) => AddClothingScreen()));
+  },
+  child: Icon(Icons.add),),
+); }
+}
