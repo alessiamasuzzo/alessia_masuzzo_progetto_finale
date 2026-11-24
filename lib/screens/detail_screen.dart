@@ -24,7 +24,6 @@ final ClothingItem detail;
                 fit: BoxFit.cover,
                  width: double.infinity),
                 Text(detail.name),
-                Text(detail.description),
                 Text("Stagione: ${detail.season}"),
                 Text("Categoria: ${detail.category}"),
           ],
