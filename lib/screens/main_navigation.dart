@@ -34,8 +34,8 @@ class MainNavigation extends StatefulWidget{
         });
       },
         destinations: [
-          NavigationDestination(icon: Icon(Icons.wb_sunny_outlined), label: "Weather"),
-          NavigationDestination(icon: Icon(Icons.checkroom_outlined), label: "Wardrobe"),
+          NavigationDestination(icon: Icon(Icons.wb_sunny_outlined), label: "Consiglio"),
+          NavigationDestination(icon: Icon(Icons.checkroom_outlined), label: "Armadio"),
           NavigationDestination(icon: Icon(Icons.shopping_bag_outlined), label: "Shop"),
         ],
       ),
