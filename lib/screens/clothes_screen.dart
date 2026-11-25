@@ -51,9 +51,10 @@ class _ClothesScreenState extends State<ClothesScreen> {
            ),
         Divider(),
         SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
   scrollDirection: Axis.horizontal,
   child: Row(
-    spacing: 8,
+    spacing: 20,
     children: categories
     .map((catg)
      => ChoiceChip(label: Text(catg), selected: _categorySelected == catg, onSelected: (_) {
