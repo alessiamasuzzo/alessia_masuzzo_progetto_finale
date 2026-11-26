@@ -1,5 +1,6 @@
 import 'package:alessia_masuzzo_progetto_finale/screens/profile_screen.dart';
 import 'package:alessia_masuzzo_progetto_finale/services/weather_service.dart';
+import 'package:alessia_masuzzo_progetto_finale/models/blob_background.dart';
 import 'package:flutter/material.dart';
 
 class WeatherScreen extends StatefulWidget {
@@ -77,6 +78,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
               Icon(
                 _cityNotFound ? Icons.search_off : Icons.cloud_off,
                 size: 64,
+                color: Theme.of(context).colorScheme.primary,
               ),
               const SizedBox(height: 12),
               Text(_error!),
@@ -134,40 +136,50 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Consiglio",
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ProfileScreen()),
-              );
-            },
-            icon: const Icon(Icons.account_circle_outlined),
+    return BlobBackground(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          surfaceTintColor: Colors.transparent,
+          scrolledUnderElevation: 0,
+          title: Text(
+            "Consiglio",
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
-        ],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: TextField(
-              onSubmitted: _searchCity,
-              decoration: const InputDecoration(
-                hintText: "Inserisci la città",
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.search),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ProfileScreen()),
+                );
+              },
+              icon: const Icon(Icons.account_circle_outlined),
+            ),
+          ],
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: TextField(
+                onSubmitted: _searchCity,
+                decoration: InputDecoration(
+                  hintText: "Inserisci la città",
+                  prefixIcon: const Icon(Icons.search),
+                  filled: true,
+                  fillColor: Theme.of(context).colorScheme.surface,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
               ),
             ),
-          ),
-          _buildResult(context),
-        ],
+            _buildResult(context),
+          ],
+        ),
       ),
     );
   }

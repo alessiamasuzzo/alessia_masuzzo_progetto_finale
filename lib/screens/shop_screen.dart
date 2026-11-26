@@ -49,8 +49,8 @@ class _ShopScreenState extends State<ShopScreen> {
   // la zona sotto la ricerca: cambia in base allo stato
   Widget _buildResult(BuildContext context) {
     final filtered = products
-    .where((p) => p.title.toLowerCase().contains(searchText.toLowerCase()))
-    .toList();
+        .where((p) => p.title.toLowerCase().contains(searchText.toLowerCase()))
+        .toList();
     if (loading) {
       return const Padding(
         padding: EdgeInsets.only(top: 60),
@@ -69,11 +69,11 @@ class _ShopScreenState extends State<ShopScreen> {
         ),
       );
     } else if (filtered.isEmpty) {
-  return const Padding(
-    padding: EdgeInsets.only(top: 60),
-    child: Center(child: Text("Nessun risultato per la tua ricerca")),
-  );}
-    else {
+      return const Padding(
+        padding: EdgeInsets.only(top: 60),
+        child: Center(child: Text("Nessun risultato per la tua ricerca")),
+      );
+    } else {
       return ListView.separated(
         itemCount: filtered.length,
         separatorBuilder: (context, index) => const Divider(),
@@ -124,16 +124,16 @@ class _ShopScreenState extends State<ShopScreen> {
                 ),
 
                 // cuore (non ancora collegato)
-IconButton(
-  onPressed: () =>
-      context.read<FavoritesController>().toggleFavorite(p),
-  icon: Icon(
-    context.watch<FavoritesController>().isFavorite(p)
-        ? Icons.favorite
-        : Icons.favorite_border_outlined,
-    color: Theme.of(context).colorScheme.primary,
-  ),
-),
+                IconButton(
+                  onPressed: () =>
+                      context.read<FavoritesController>().toggleFavorite(p),
+                  icon: Icon(
+                    context.watch<FavoritesController>().isFavorite(p)
+                        ? Icons.favorite
+                        : Icons.favorite_border_outlined,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
               ],
             ),
           );
@@ -170,26 +170,32 @@ IconButton(
                 Expanded(
                   child: TextField(
                     onSubmitted: (value) {
-  setState(() {
-    searchText = value;
-  });
-},
-                    decoration: const InputDecoration(
+                      setState(() {
+                        searchText = value;
+                      });
+                    },
+                    decoration: InputDecoration(
                       hintText: "Cerca (dress, shoes...)",
-                      border: OutlineInputBorder(),
                       prefixIcon: Icon(Icons.search),
+                      filled: true,
+                      fillColor: Theme.of(context).colorScheme.surface,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
                     ),
                   ),
                 ),
-IconButton.filled(
-  onPressed: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const FavoritesScreen()),
-    );
-  },
-  icon: const Icon(Icons.favorite_border_outlined),
-),
+                IconButton.filled(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FavoritesScreen(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.favorite_border_outlined),
+                ),
               ],
             ),
           ),

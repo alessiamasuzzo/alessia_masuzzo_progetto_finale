@@ -16,18 +16,80 @@ final ClothingItem detail;
               ?.copyWith(color: Theme.of(context).colorScheme.secondary),
         ),
       ),
-      body: Card(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-                Image.network(detail.imageUrl,
-                fit: BoxFit.cover,
-                 width: double.infinity),
-                Text(detail.name),
-                Text("Stagione: ${detail.season}"),
-                Text("Categoria: ${detail.category}"),
-          ],
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 500),
+            child: Card(
+              margin: EdgeInsets.zero,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // immagine: proporzione fissa, larghezza che si adatta
+                  AspectRatio(
+                    aspectRatio: 4 / 5,
+                    child: Image.network(
+                      detail.imageUrl,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      errorBuilder: (context, error, stack) =>
+                          const Center(child: Icon(Icons.broken_image_outlined)),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // categoria: piccola, sopra il nome
+                        Text(
+                          detail.category.toUpperCase(),
+                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                color: Theme.of(context).colorScheme.secondary,
+                                letterSpacing: 1.2,
+                              ),
+                        ),
+                        const SizedBox(height: 6),
+
+                        // nome: il testo più grande e in grassetto
+                        Text(
+                          detail.name,
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.w700,
+                              ),
+                        ),
+                        const SizedBox(height: 16),
+                        const Divider(),
+                        const SizedBox(height: 12),
+
+                        // stagione: etichetta a sinistra, valore a destra
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Stagione",
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Theme.of(context).colorScheme.outline,
+                                  ),
+                            ),
+                            Text(
+                              detail.season,
+                              style: Theme.of(context).textTheme.labelLarge,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
-       );
-      }}
+    );
+  }
+}

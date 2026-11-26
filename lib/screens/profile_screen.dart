@@ -1,4 +1,6 @@
 import 'package:alessia_masuzzo_progetto_finale/screens/login_screen.dart';
+import 'package:alessia_masuzzo_progetto_finale/theme/app_colors.dart';
+import 'package:alessia_masuzzo_progetto_finale/models/blob_background.dart';
 import 'package:flutter/material.dart';
 import 'package:alessia_masuzzo_progetto_finale/services/auth_service.dart';
 
@@ -18,46 +20,97 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Profilo",
-          style: Theme.of(context).textTheme.headlineMedium,
+    return BlobBackground(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          surfaceTintColor: Colors.transparent,
+          scrolledUnderElevation: 0,
+          title: Text(
+            "Profilo",
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
         ),
-      ),
-      body: Padding(
-        padding: EdgeInsetsGeometry.only(left: 20, top: 30),
-        child: Column(
-          spacing: 5,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CircleAvatar(
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              radius: 40,
-              child: Icon(
-                Icons.person,
-                size: 40,
-                color: Theme.of(context).colorScheme.onPrimary,
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Center(
+                child: CircleAvatar(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  radius: 44,
+                  child: Icon(
+                    Icons.person,
+                    size: 44,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                ),
               ),
-            ),
-            Padding(padding: EdgeInsets.all(5)),
-            Text("Email:", style: Theme.of(context).textTheme.labelMedium),
-            Text("$email", style: Theme.of(context).textTheme.bodySmall),
-            TextButton.icon(
-              onPressed: () async {
-                await _authService.logout();
+              const SizedBox(height: 28),
 
-                if (!mounted) return;
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
-                  ((route) => false),
-                );
-              },
-              icon: Icon(Icons.logout_outlined),
-              label: Text("Esci"),
-            ),
-          ],
+              // email in una card, come le altre schermate
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    spacing: 14,
+                    children: [
+                      Icon(
+                        Icons.mail_outline,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Email",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelSmall
+                                  ?.copyWith(
+                                    color: Theme.of(context).colorScheme.outline,
+                                  ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              "$email",
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              OutlinedButton.icon(
+                style: OutlinedButton.styleFrom(
+                  shape: const StadiumBorder(),
+                  side: const BorderSide(color: AppColors.lightBorderDefault),
+                  foregroundColor: Theme.of(context).colorScheme.primary,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
+                onPressed: () async {
+                  await _authService.logout();
+
+                  if (!mounted) return;
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                    ((route) => false),
+                  );
+                },
+                icon: Icon(Icons.logout_outlined),
+                label: Text("Esci"),
+              ),
+            ],
+          ),
         ),
       ),
     );

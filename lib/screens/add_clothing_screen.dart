@@ -1,5 +1,6 @@
 import 'package:alessia_masuzzo_progetto_finale/models/categories.dart';
 import 'package:alessia_masuzzo_progetto_finale/models/seasons.dart';
+import 'package:alessia_masuzzo_progetto_finale/models/blob_background.dart';
 import 'package:flutter/material.dart';
 
 class AddClothingScreen extends StatefulWidget {
@@ -34,79 +35,114 @@ class _AddClothingScreenState extends State<AddClothingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Form", style: Theme.of(context).textTheme.headlineMedium),
-      ),
-      body: Padding(
-            padding: EdgeInsetsGeometry.all(20.00),
-            child: Form(
-              key: _addClothingKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text("Inserisci il nome"),
-                  TextFormField(
-                    onSaved: (newValue) => _nameClothing = newValue ?? "",
-                    validator: _validateName,
-                    decoration: InputDecoration(
-                      // label: Text("Nome capo"),
-                      hint: Text("Inserisci il nome del capo"),
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      border: OutlineInputBorder(),
+    return BlobBackground(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          surfaceTintColor: Colors.transparent,
+          scrolledUnderElevation: 0,
+          title: Text("Form", style: Theme.of(context).textTheme.headlineMedium),
+        ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Form(
+                key: _addClothingKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Inserisci il nome",
+                      style: Theme.of(context).textTheme.labelLarge,
                     ),
-                  ),
-
-                  SizedBox(height: 25),
-
-                  Text("Seleziona la stagione"),
-                  DropdownButtonFormField<String>(
-                    initialValue: _seasonSelected,
-                    decoration: const InputDecoration(
-                      hintText: 'Seleziona una voce',
-                      border: OutlineInputBorder(),
+                    const SizedBox(height: 8),
+                    TextFormField(
+                      onSaved: (newValue) => _nameClothing = newValue ?? "",
+                      validator: _validateName,
+                      decoration: InputDecoration(
+                        hintText: "Inserisci il nome del capo",
+                        filled: true,
+                        fillColor: Theme.of(context).colorScheme.surface,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
                     ),
-                    items: seasons.map((String valore) {
-                      return DropdownMenuItem<String>(
-                        value: valore,
-                        child: Text(valore),
-                      );
-                    }).toList(),
-                    onChanged: (String? nuovoValore) {
-                      setState(() {
-                        _seasonSelected = nuovoValore;
-                      });
-                    },
-                    validator: _validateDropdown,
-                  ),
 
-                  SizedBox(height: 25),
+                    const SizedBox(height: 25),
 
-                  Text("Seleziona la categoria"),
-                  DropdownButtonFormField<String>(
-                    initialValue: _categorySelected,
-                    decoration: const InputDecoration(
-                      hintText: 'Seleziona una voce',
-                      border: OutlineInputBorder(),
+                    Text(
+                      "Seleziona la stagione",
+                      style: Theme.of(context).textTheme.labelLarge,
                     ),
-                    items: categories.map((String valore) {
-                      return DropdownMenuItem<String>(
-                        value: valore,
-                        child: Text(valore),
-                      );
-                    }).toList(),
-                    onChanged: (String? nuovoValore) {
-                      setState(() {
-                        _categorySelected = nuovoValore;
-                      });
-                    },
-                    validator: _validateDropdown,
-                  ),
-                ],
+                    const SizedBox(height: 8),
+                    DropdownButtonFormField<String>(
+                      initialValue: _seasonSelected,
+                      borderRadius: BorderRadius.circular(16),
+                      decoration: InputDecoration(
+                        hintText: 'Seleziona una voce',
+                        filled: true,
+                        fillColor: Theme.of(context).colorScheme.surface,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                      items: seasons.map((String valore) {
+                        return DropdownMenuItem<String>(
+                          value: valore,
+                          child: Text(valore),
+                        );
+                      }).toList(),
+                      onChanged: (String? nuovoValore) {
+                        setState(() {
+                          _seasonSelected = nuovoValore;
+                        });
+                      },
+                      validator: _validateDropdown,
+                    ),
+
+                    const SizedBox(height: 25),
+
+                    Text(
+                      "Seleziona la categoria",
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    const SizedBox(height: 8),
+                    DropdownButtonFormField<String>(
+                      initialValue: _categorySelected,
+                      borderRadius: BorderRadius.circular(16),
+                      decoration: InputDecoration(
+                        hintText: 'Seleziona una voce',
+                        filled: true,
+                        fillColor: Theme.of(context).colorScheme.surface,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                      items: categories.map((String valore) {
+                        return DropdownMenuItem<String>(
+                          value: valore,
+                          child: Text(valore),
+                        );
+                      }).toList(),
+                      onChanged: (String? nuovoValore) {
+                        setState(() {
+                          _categorySelected = nuovoValore;
+                        });
+                      },
+                      validator: _validateDropdown,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-      );
+        ),
+      ),
+    );
   }
 }
