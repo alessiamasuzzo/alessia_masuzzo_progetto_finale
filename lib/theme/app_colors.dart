@@ -27,5 +27,11 @@ class AppColors{
   static const lightBorderDefault = Color(0xffe3dce6);
   static const lightBorderActive = Color(0xff7a6b80);
 
+    //background decorations
+  static const lightBlobPurple = Color(0xffEADFF0);
+  static const lightBlobGreen = Color(0xffDDE8D3);
+
+    //navigation bar
+  static const lightNavBackground = Color(0xffF4ECF7);
 }
 
