@@ -1,4 +1,5 @@
 import 'package:alessia_masuzzo_progetto_finale/controllers/favorites_controller.dart';
+import 'package:alessia_masuzzo_progetto_finale/controllers/outfit_controller.dart';
 import 'package:alessia_masuzzo_progetto_finale/screens/login_screen.dart';
 import 'package:alessia_masuzzo_progetto_finale/screens/main_navigation.dart';
 import 'package:alessia_masuzzo_progetto_finale/screens/wardrobe_screen.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
   providers: [
+    ChangeNotifierProvider(create: (_) => OutfitController()),
     ChangeNotifierProvider(create: (_) => WardrobeController()),
     ChangeNotifierProvider(create: (_) => FavoritesController()),
   ],
