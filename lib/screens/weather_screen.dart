@@ -1,7 +1,9 @@
+import 'package:alessia_masuzzo_progetto_finale/controllers/wardrobe_controller.dart';
 import 'package:alessia_masuzzo_progetto_finale/screens/profile_screen.dart';
 import 'package:alessia_masuzzo_progetto_finale/services/weather_service.dart';
 import 'package:alessia_masuzzo_progetto_finale/models/blob_background.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
@@ -88,43 +90,112 @@ class _WeatherScreenState extends State<WeatherScreen> {
       );
     } else if (_weather != null) {
       final weather = _weather!;
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Card(
-          color: Theme.of(context).colorScheme.primary,
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // blocco meteo
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Card(
+              color: Theme.of(context).colorScheme.primary,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      weather.city,
-                      style: Theme.of(context).textTheme.headlineMedium
-                          ?.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                          ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          weather.city,
+                          style: Theme.of(context).textTheme.headlineMedium
+                              ?.copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                        ),
+                        Text(
+                          "${weather.temperature.round()}°",
+                          style: Theme.of(context).textTheme.headlineLarge
+                              ?.copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      "${weather.temperature.round()}°",
-                      style: Theme.of(context).textTheme.headlineLarge
-                          ?.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                          ),
+                    Icon(
+                      _iconFor(weather.code),
+                      size: 64,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                   ],
                 ),
-                Icon(
-                  _iconFor(weather.code),
-                  size: 64,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
-              ],
+              ),
             ),
           ),
-        ),
+
+          // capi consigliati
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
+            child: Text(
+              "Capi consigliati",
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+          ),
+          if (context.watch<WardrobeController>().clothes.isEmpty)
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text("Il tuo armadio è vuoto: carica il tuo primo capo"),
+            )
+          else if (context
+              .watch<WardrobeController>()
+              .forTemperature(weather.temperature)
+              .isEmpty)
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text("Nessun capo adatto a questa temperatura"),
+            )
+          else
+            SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                spacing: 10,
+                children: context
+                    .watch<WardrobeController>()
+                    .forTemperature(weather.temperature)
+                    .map((c) => SizedBox(
+                          width: 110,
+                          height: 150,
+                          child: Card(
+                            margin: EdgeInsets.zero,
+                            clipBehavior: Clip.antiAlias,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Image.memory(
+                                    c.image,
+                                    fit: BoxFit.cover,
+                                    width: double.infinity,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Text(
+                                    c.name,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: Theme.of(context).textTheme.labelSmall,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ))
+                    .toList(),
+              ),
+            ),
+        ],
       );
     } else {
       return const Padding(
