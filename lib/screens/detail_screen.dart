@@ -30,8 +30,8 @@ final ClothingItem detail;
                   // immagine: proporzione fissa, larghezza che si adatta
                   AspectRatio(
                     aspectRatio: 4 / 5,
-                    child: Image.network(
-                      detail.imageUrl,
+                    child: Image.memory(
+                      detail.image,
                       fit: BoxFit.cover,
                       width: double.infinity,
                       errorBuilder: (context, error, stack) =>

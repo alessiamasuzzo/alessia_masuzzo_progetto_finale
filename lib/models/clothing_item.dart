@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import 'dart:typed_data';
 
 class ClothingItem{
- String imageUrl;
+ Uint8List image;
  String name; 
  String category;
  String season;
@@ -11,9 +11,7 @@ ClothingItem({
   required this.name, 
   required this.category, 
   required this.favorite,
-  required this.imageUrl,
+  required this.image,
   required this.season,
   });
 }
-
-
