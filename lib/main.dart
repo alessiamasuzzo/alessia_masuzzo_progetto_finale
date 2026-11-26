@@ -1,3 +1,4 @@
+import 'package:alessia_masuzzo_progetto_finale/controllers/favorites_controller.dart';
 import 'package:alessia_masuzzo_progetto_finale/screens/login_screen.dart';
 import 'package:alessia_masuzzo_progetto_finale/screens/main_navigation.dart';
 import 'package:alessia_masuzzo_progetto_finale/screens/wardrobe_screen.dart';
@@ -23,10 +24,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => WardrobeController(),
-      child:
-    MaterialApp(
+    return MultiProvider(
+  providers: [
+    ChangeNotifierProvider(create: (_) => WardrobeController()),
+    ChangeNotifierProvider(create: (_) => FavoritesController()),
+  ],
+  child: MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.light,
       debugShowCheckedModeBanner: false,
