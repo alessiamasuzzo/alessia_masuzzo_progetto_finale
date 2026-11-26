@@ -1,2 +1,2 @@
 
-List<String> categories = ["Elegante", "Lavoro", "Scuola", "Cena", "Discoteca"];
+List<String> categories = ["Elegante", "Lavoro", "Scuola", "Sport"];
