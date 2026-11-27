@@ -41,7 +41,6 @@ class WardrobeController extends ChangeNotifier {
     }
   }
 
-  // capi adatti a una temperatura
   List<ClothingItem> forTemperature(double temperature) {
     List<String> matching;
     if (temperature < 10) {

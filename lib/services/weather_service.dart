@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-// i dati che la schermata riceve
 class WeatherData {
   final String city;
   final double temperature;

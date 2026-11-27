@@ -19,7 +19,6 @@ class OutfitScreen extends StatefulWidget {
 class _OutfitScreenState extends State<OutfitScreen> {
   String? _categorySelected;
 
-  // le immagini dei capi: 2 affiancate, 3 con un riquadro vuoto, 4 a griglia
   Widget _collage(List<ClothingItem> items) {
     final shown = items.take(4).toList();
 
@@ -85,7 +84,6 @@ class _OutfitScreenState extends State<OutfitScreen> {
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // riga dei preferiti e linea: solo se c'è almeno un preferito
                   if (context.watch<OutfitController>().favorite.isNotEmpty) ...[
                     SingleChildScrollView(
                       padding:
@@ -152,7 +150,6 @@ class _OutfitScreenState extends State<OutfitScreen> {
                     const Divider(),
                   ],
 
-                  // chip delle categorie
                   SingleChildScrollView(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -196,7 +193,6 @@ class _OutfitScreenState extends State<OutfitScreen> {
                     ),
                   ),
 
-                  // griglia degli outfit
                   Expanded(
                     child: context
                             .watch<OutfitController>()

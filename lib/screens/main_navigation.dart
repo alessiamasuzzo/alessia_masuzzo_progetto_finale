@@ -4,12 +4,6 @@ import 'package:alessia_masuzzo_progetto_finale/screens/weather_screen.dart';
 import 'package:alessia_masuzzo_progetto_finale/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-// main.dart (StreamBuilder)
-// ├── utente non loggato → LoginScreen
-// └── utente loggato → MainNavigation
-//                       ├── body: la pagina scelta dall'indice
-//                       │     (Consiglio | Armadio | Shop)
-//                       └── bottomNavigationBar: la NavigationBar
 
 class MainNavigation extends StatefulWidget{
   const MainNavigation({super.key});

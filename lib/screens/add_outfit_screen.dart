@@ -24,10 +24,8 @@ class _AddOutfitScreenState extends State<AddOutfitScreen> {
 
   String _nameOutfit = "";
 
-  // i capi scelti: un insieme, senza doppioni
   final Set<ClothingItem> _selected = {};
 
-  // cambia a ogni salvataggio: ricrea i campi e li svuota
   int _formVersion = 0;
 
   String? _validateName(String? value) {
@@ -160,7 +158,6 @@ class _AddOutfitScreenState extends State<AddOutfitScreen> {
                     ),
                     const SizedBox(height: 8),
 
-                    // selezione multipla dei capi
                     FormField<int>(
                       initialValue: 0,
                       autovalidateMode: AutovalidateMode.onUserInteraction,

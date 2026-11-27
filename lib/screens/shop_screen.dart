@@ -46,7 +46,6 @@ class _ShopScreenState extends State<ShopScreen> {
     _loadProducts();
   }
 
-  // la zona sotto la ricerca: cambia in base allo stato
   Widget _buildResult(BuildContext context) {
     final filtered = products
         .where((p) => p.title.toLowerCase().contains(searchText.toLowerCase()))
@@ -86,7 +85,6 @@ class _ShopScreenState extends State<ShopScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 16,
               children: [
-                // immagine del prodotto
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.network(
@@ -103,7 +101,6 @@ class _ShopScreenState extends State<ShopScreen> {
                   ),
                 ),
 
-                // nome e descrizione
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +120,6 @@ class _ShopScreenState extends State<ShopScreen> {
                   ),
                 ),
 
-                // cuore (non ancora collegato)
                 IconButton(
                   onPressed: () =>
                       context.read<FavoritesController>().toggleFavorite(p),
@@ -161,7 +157,6 @@ class _ShopScreenState extends State<ShopScreen> {
       ),
       body: Column(
         children: [
-          // riga con ricerca e bottone preferiti
           Padding(
             padding: const EdgeInsets.all(20),
             child: Row(
@@ -200,7 +195,6 @@ class _ShopScreenState extends State<ShopScreen> {
             ),
           ),
 
-          // zona che cambia: spinner, errore, vuoto o lista
           Expanded(child: _buildResult(context)),
         ],
       ),

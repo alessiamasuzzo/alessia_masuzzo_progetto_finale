@@ -8,7 +8,6 @@ class AuthService {
         email: email,
         password: password,
       );
-      //aggiungere shared_preferences per ricordare se l'utente è loggato
       return null;
     } on FirebaseAuthException catch (errore) {
       if (errore.code == "invalid-credential") {

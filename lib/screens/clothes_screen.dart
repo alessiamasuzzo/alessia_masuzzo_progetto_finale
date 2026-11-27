@@ -1,15 +1,12 @@
 import 'package:alessia_masuzzo_progetto_finale/controllers/wardrobe_controller.dart';
 import 'package:alessia_masuzzo_progetto_finale/models/categories.dart';
-import 'package:alessia_masuzzo_progetto_finale/models/clothing_item.dart';
 import 'package:alessia_masuzzo_progetto_finale/screens/add_clothing_screen.dart';
 import 'package:alessia_masuzzo_progetto_finale/screens/detail_screen.dart';
 import 'package:alessia_masuzzo_progetto_finale/theme/app_colors.dart';
 import 'package:alessia_masuzzo_progetto_finale/models/blob_background.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../controllers/wardrobe_controller.dart';
 
 class ClothesScreen extends StatefulWidget {
   const ClothesScreen({super.key});
@@ -38,7 +35,6 @@ class _ClothesScreenState extends State<ClothesScreen> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // riga dei preferiti e linea: compaiono solo se c'è almeno un preferito
             if (context.watch<WardrobeController>().favorite.isNotEmpty) ...[
               SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(
@@ -120,7 +116,6 @@ class _ClothesScreenState extends State<ClothesScreen> {
               const Divider(),
             ],
 
-            // chip delle categorie
             SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               scrollDirection: Axis.horizontal,
@@ -162,7 +157,6 @@ class _ClothesScreenState extends State<ClothesScreen> {
               ),
             ),
 
-            // griglia dei capi
             Expanded(
               child: context.watch<WardrobeController>().clothes.isEmpty
                   ? Center(

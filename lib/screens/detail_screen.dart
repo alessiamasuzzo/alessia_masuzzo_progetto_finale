@@ -27,7 +27,6 @@ final ClothingItem detail;
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // immagine: proporzione fissa, larghezza che si adatta
                   AspectRatio(
                     aspectRatio: 4 / 5,
                     child: Image.memory(
@@ -44,7 +43,6 @@ final ClothingItem detail;
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // categoria: piccola, sopra il nome
                         Text(
                           detail.category.toUpperCase(),
                           style: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -54,7 +52,6 @@ final ClothingItem detail;
                         ),
                         const SizedBox(height: 6),
 
-                        // nome: il testo più grande e in grassetto
                         Text(
                           detail.name,
                           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -65,7 +62,6 @@ final ClothingItem detail;
                         const Divider(),
                         const SizedBox(height: 12),
 
-                        // stagione: etichetta a sinistra, valore a destra
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

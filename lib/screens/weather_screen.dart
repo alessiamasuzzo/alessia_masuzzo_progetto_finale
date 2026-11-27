@@ -53,7 +53,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
     }
   }
 
-  // dal codice meteo all'icona
   IconData _iconFor(int code) {
     if (code == 0) return Icons.wb_sunny_outlined;
     if (code <= 48) return Icons.cloud_outlined;
@@ -93,7 +92,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // blocco meteo
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Card(
@@ -133,7 +131,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
             ),
           ),
 
-          // capi consigliati
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
             child: Text(

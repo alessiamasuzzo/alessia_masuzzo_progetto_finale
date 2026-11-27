@@ -26,7 +26,6 @@ class _AddClothingScreenState extends State<AddClothingScreen> {
 
   Uint8List? _image;
 
-  // cambia a ogni salvataggio: ricrea i campi e li svuota
   int _formVersion = 0;
 
   String? _validateName(String? value) {
@@ -66,7 +65,6 @@ class _AddClothingScreenState extends State<AddClothingScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // foto
                     FormField<Uint8List>(
                       validator: (value) =>
                           value == null ? "La foto è obbligatoria" : null,
