@@ -125,8 +125,8 @@ class _ShopScreenState extends State<ShopScreen> {
                       context.read<FavoritesController>().toggleFavorite(p),
                   icon: Icon(
                     context.watch<FavoritesController>().isFavorite(p)
-                        ? Icons.favorite
-                        : Icons.favorite_border_outlined,
+                        ? Icons.bookmark
+                        : Icons.bookmark_border,
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
@@ -189,7 +189,7 @@ class _ShopScreenState extends State<ShopScreen> {
                       ),
                     );
                   },
-                  icon: const Icon(Icons.favorite_border_outlined),
+                  icon: const Icon(Icons.bookmark_border),
                 ),
               ],
             ),

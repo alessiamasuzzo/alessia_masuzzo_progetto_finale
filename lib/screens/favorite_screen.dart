@@ -67,7 +67,7 @@ class FavoritesScreen extends StatelessWidget {
                             .read<FavoritesController>()
                             .toggleFavorite(p),
                         icon: Icon(
-                          Icons.favorite,
+                          Icons.bookmark,
                           color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
